@@ -1,5 +1,7 @@
 package ibf2022.batch2.csf.backend.models;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,8 +70,10 @@ public class Bundle {
 
     public static Bundle convertFromDoc(Document doc) {
         Bundle b = new Bundle();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("E dd MMM yyyy HH:mm:ss").withZone(ZoneId.of("Asia/Singapore"));
+
         b.setBundleId(doc.getString("bundleId"));
-        b.setDate(doc.getDate("date").toString());
+        b.setDate(dtf.format(doc.getDate("date").toInstant()));
         b.setTitle(doc.getString("title"));
         b.setName(doc.getString("name"));
         b.setComments(doc.getString("comments"));
@@ -80,7 +84,6 @@ public class Bundle {
 
     public JsonObject toJson() {
         JsonArrayBuilder jab = Json.createArrayBuilder();
-        
         for (String url: urls) {
             jab.add(url);
         }

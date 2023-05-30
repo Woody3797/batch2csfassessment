@@ -42,7 +42,7 @@ public class ImageRepository {
             metadata.setContentLength(file.getSize());
 
             // woodybucket - bucket name
-            // key - key
+            // key - path of file
             // file.getInputStream() - actual bytes
             // metadata
             PutObjectRequest putReq = new PutObjectRequest("woodybucket", key + "/" + file.getOriginalFilename(), file.getInputStream(), metadata);

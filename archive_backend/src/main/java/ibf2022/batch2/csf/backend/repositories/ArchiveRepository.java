@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -59,8 +61,12 @@ public class ArchiveRepository {
 	// You are free to change the parameter and the return type
 	// Do not change the method's name
 	// Write the native mongo query that you will be using in this method
-	//
-	//
+
+	// db.archives.findOne(
+    //     { bundleId: <bundleId> },
+    //     { _id: 0}
+    // )
+
 	public Document getBundleByBundleId(String bundleId) {
         Query query = new Query(Criteria.where("bundleId").is(bundleId));
         Document doc = mongoTemplate.findOne(query, Document.class, "archives");
@@ -73,13 +79,18 @@ public class ArchiveRepository {
 	// Do not change the method's name
 	// Write the native mongo query that you will be using in this method
 
-	// db.archives.find().pretty()
-	//
-	public List<Document> getBundles(/* any number of parameters here */) {
-        List<Document> docs = mongoTemplate.findAll(Document.class, "archives");
+	// db.archives.aggregate(
+    //     [
+    //         { $sort : { date: -1, title: 1 }}
+    //     ]
+    // )
+
+	public List<Document> getBundles() {
+        Query query = new Query(Criteria.where("bundleId").exists(true));
+        query.with(Sort.by(Direction.DESC, "date"))
+        .with(Sort.by(Direction.ASC, "title"));
+        List<Document> docs = mongoTemplate.find(query, Document.class, "archives");
 
 		return docs;
 	}
-
-
 }
