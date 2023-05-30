@@ -7,14 +7,15 @@ import { View2Component } from './view2/view2.component';
 
 export const routes: Routes = [
     {path: '', component: View0Component },
-    {path: 'upload1', component: View1Component },
-    {path: 'uploaded', component: View2Component },
+    {path: 'view1', component: View1Component },
+    {path: 'view2', component: View2Component },
+    {path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
   exports: [RouterModule]
 })

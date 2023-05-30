@@ -1,5 +1,5 @@
 <div style="border: solid black; display: flexbox; width: fit-content;">
-    <form method="post" (submit)="process1()" [formGroup]="form">
+    <form method="post" (submit)="upload()" [formGroup]="form">
         <table>
             <tr>
                 <td>Name: </td>
@@ -22,7 +22,7 @@
             <tr>
                 <td>Archive: </td>
                 <td>
-                    <input type="file" accept=".zip" formControlName="archive">
+                    <input type="file" formControlName="archive" #file>
                 </td>
             </tr>
             <tr>
@@ -30,7 +30,7 @@
                 <td>
                     <button [routerLink]="['/']">Cancel</button>
                     &nbsp;
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                 </td>
             </tr>
         </table>

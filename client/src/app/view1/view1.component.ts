@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilityService } from '../utility.service';
 import { Router } from '@angular/router';
@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./view1.component.css']
 })
 export class View1Component implements OnInit {
+
+    @ViewChild('file')
+    file!: ElementRef
 
     fb = inject(FormBuilder)
     utility = inject(UtilityService)
@@ -27,9 +30,11 @@ export class View1Component implements OnInit {
         })
     }
     
-    process1() {
+    upload() {
         let f = this.form.value
-        this.utility.upload1(f['name'], f['title'], f['comments'], f['archive'])
-        this.router.navigate(['/uploaded'])
+        const arc: File = this.file.nativeElement.files[0]
+        console.info(arc)
+        this.utility.upload(f.name, f.title, f.comments, arc).subscribe()
+        this.router.navigate(['/view2'])
     }
 }

@@ -7,20 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class UtilityService {
 
-    constructor() { }
-
     http = inject(HttpClient)
 
 
-    upload1(name: string, title: string, comments: string, archive: File): Observable<string> {
-        var formData = new FormData();
+    upload(name: string, title: string, comments: string, archive: File): Observable<any> {
+        const formData = new FormData();
         formData.set('name', name)
         formData.set('title', title)
         formData.set('comments', comments)
         formData.set('archive', archive)
         // formData.forEach(f => console.info(f))
 
-        return this.http.post<string>('http://localhost:8080/upload', formData)
+        return this.http.post<any>('http://localhost:8080/upload', formData)
     }
 
 

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { View1Component } from './view1/view1.component';
 import { View0Component } from './view0/view0.component';
 import { View2Component } from './view2/view2.component';
+import { UtilityService } from './utility.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { View2Component } from './view2/view2.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [UtilityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
