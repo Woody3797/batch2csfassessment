@@ -6,6 +6,8 @@
 
 <div *ngIf="bundles$ | async as b">
     <div *ngFor="let v of b">
-        <h2 [routerLink]="['/view2', v.bundleId]"> {{ v.title }} --- {{ v.date }} </h2>
+        <h2>
+            <a [routerLink]="['/view2', v.bundleId]" style="border: dashed darkgray;"> {{ v.title }} --- {{ v.date }} </a>
+        </h2>
     </div>
 </div>
