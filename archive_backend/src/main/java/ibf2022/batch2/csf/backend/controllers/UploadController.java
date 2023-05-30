@@ -48,8 +48,14 @@ public class UploadController {
     @GetMapping(path = "/bundle/{bundleId}")
     public ResponseEntity<String> getBundleByBundleId(@PathVariable String bundleId) {
         Bundle bundle = uploadService.getBundleByBundleId(bundleId);
-
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bundle.toJson().toString());
+        if (bundle != null) {
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bundle.toJson().toString());
+        } else {
+            return ResponseEntity.status(404).body(Json.createObjectBuilder()
+            .add("error", "bundleId " + bundleId + " not found")
+            .build().toString());
+        }
+        
     }
 	
 

@@ -3,6 +3,7 @@ package ibf2022.batch2.csf.backend.repositories;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,11 +68,15 @@ public class ArchiveRepository {
     //     { _id: 0}
     // )
 
-	public Document getBundleByBundleId(String bundleId) {
-        Query query = new Query(Criteria.where("bundleId").is(bundleId));
-        Document doc = mongoTemplate.findOne(query, Document.class, "archives");
+	public Optional<Document> getBundleByBundleId(String bundleId) {
+        try {
+            Query query = new Query(Criteria.where("bundleId").is(bundleId));
+            Document doc = mongoTemplate.findOne(query, Document.class, "archives");
 
-		return doc;
+            return Optional.of(doc);
+        } catch (Exception e) {
+            return null;
+        }
 	}
 
 	//TODO: Task 6
