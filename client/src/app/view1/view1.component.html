@@ -31,7 +31,7 @@
                 <td>
                     <button [routerLink]="['/']">Cancel</button>
                     &nbsp;
-                    <button type="submit">Submit</button>
+                    <button type="submit" [disabled]="form.invalid">Submit</button>
                 </td>
             </tr>
         </table>

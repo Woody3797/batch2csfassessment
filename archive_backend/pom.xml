@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
+		<version>3.0.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ibf2022.batch2.csf</groupId>
@@ -14,7 +14,7 @@
 	<name>backend</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
