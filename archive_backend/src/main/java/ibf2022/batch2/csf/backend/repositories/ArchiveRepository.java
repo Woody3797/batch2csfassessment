@@ -12,8 +12,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import com.mongodb.client.result.UpdateResult;
-
 @Repository
 public class ArchiveRepository {
 
@@ -52,7 +50,7 @@ public class ArchiveRepository {
         .set("comments", comments)
         .set("urls", urlList);
 
-        UpdateResult result = mongoTemplate.upsert(query, update, Document.class, "archives");
+        mongoTemplate.upsert(query, update, Document.class, "archives");
 
 		return key;
 	}
@@ -74,7 +72,7 @@ public class ArchiveRepository {
 	// You are free to change the parameter and the return type
 	// Do not change the method's name
 	// Write the native mongo query that you will be using in this method
-    
+
 	// db.archives.find().pretty()
 	//
 	public List<Document> getBundles(/* any number of parameters here */) {
