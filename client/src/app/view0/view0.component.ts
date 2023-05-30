@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { UtilityService } from '../utility.service';
+import { Observable } from 'rxjs';
+import { Bundle } from '../model';
 
 @Component({
   selector: 'app-view0',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class View0Component implements OnInit {
 
+    utility = inject(UtilityService)
+
+    bundles$!: Observable<Bundle[]>
+    bundleId = ''
+
     ngOnInit(): void {
-        
+        this.bundles$ = this.utility.getBundles()
     }
 }

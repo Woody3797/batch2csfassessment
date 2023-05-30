@@ -76,8 +76,12 @@ public class ArchiveRepository {
 	// Write the native mongo query that you will be using in this method
 	//
 	//
-	public Object getBundles(/* any number of parameters here */) {
-		return null;
+	public List<Document> getBundles(/* any number of parameters here */) {
+        Query query = new Query(Criteria.where("bundleId").exists(true));
+
+        List<Document> docs = mongoTemplate.findAll(Document.class, "archives");
+
+		return docs;
 	}
 
 

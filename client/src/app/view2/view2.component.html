@@ -1,6 +1,24 @@
 <h2>Contents of uploaded files</h2>
 
+<div *ngIf="bundle$ | async as b">
+    <div>
+        {{ b.title }}
+    </div>
+    <br>
+    <div>
+        by {{ b.name }} on {{ b.date }}
+    </div>
+    <br>
+    <div>
+        {{ b.comments }}
+    </div>
+    <br>
+    <div *ngFor="let url of b.urls">
+        <img [src]="url" style="height: 150px;">
+        <br>
+    </div>
+</div>
 <div>
-    
+    <button [routerLink]="['/']">Back</button>
 </div>
 

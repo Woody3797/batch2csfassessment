@@ -8,14 +8,14 @@ import { View2Component } from './view2/view2.component';
 export const routes: Routes = [
     {path: '', component: View0Component },
     {path: 'view1', component: View1Component },
-    {path: 'view2', component: View2Component },
+    {path: 'view2/:bundleId', component: View2Component },
     {path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, { useHash: false }),
   ],
   exports: [RouterModule]
 })

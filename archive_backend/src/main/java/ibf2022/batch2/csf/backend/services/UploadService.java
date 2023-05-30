@@ -2,6 +2,7 @@ package ibf2022.batch2.csf.backend.services;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,5 +39,16 @@ public class UploadService {
         Bundle bundle = Bundle.convertFromDoc(doc);
 
         return bundle;
+    }
+
+    public List<Bundle> getBundles() {
+        List<Bundle> bundles = new ArrayList<>();
+        List<Document> docs = archiveRepository.getBundles();
+        for (Document doc : docs) {
+            Bundle bundle = Bundle.convertFromDoc(doc);
+            bundles.add(bundle);
+        }
+
+        return bundles;
     }
 }

@@ -1,5 +1,7 @@
 package ibf2022.batch2.csf.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import ibf2022.batch2.csf.backend.models.Bundle;
 import ibf2022.batch2.csf.backend.services.UploadService;
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
 
 @Controller
 @RequestMapping
@@ -50,5 +54,15 @@ public class UploadController {
 	
 
 	// TODO: Task 6
+    @GetMapping(path = "/bundles", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getBundles() {
+        List<Bundle> bundles = uploadService.getBundles();
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for (Bundle b : bundles) {
+            jab.add(b.toJson());
+        }
+        JsonArray jArr = jab.build();
 
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(jArr.toString());
+    }
 }

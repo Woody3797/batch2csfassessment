@@ -17,9 +17,8 @@ export class View1Component implements OnInit {
     utility = inject(UtilityService)
     router = inject(Router)
 
-
     form!: FormGroup
-
+    bundleId!: string
 
     ngOnInit(): void {
         this.form = this.fb.group({
@@ -34,13 +33,15 @@ export class View1Component implements OnInit {
         let f = this.form.value
         const arc: File = this.file.nativeElement.files[0]
         this.utility.upload(f.name, f.title, f.comments, arc).subscribe({
-            next: (v) => console.info(v),
+            next: (v) => {
+                console.log(v),
+                this.utility.bundleId = v.bundleId
+            },
             error: (e) => {
                 console.info(e),
                 alert(e.error.message)
             },
-            complete: () => {this.router.navigate(['/view2'])}
+            complete: () => {this.router.navigate(['/view2', this.utility.bundleId])}
         })
-        // this.router.navigate(['/view2'])
     }
 }
