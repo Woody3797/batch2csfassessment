@@ -33,8 +33,14 @@ export class View1Component implements OnInit {
     upload() {
         let f = this.form.value
         const arc: File = this.file.nativeElement.files[0]
-        console.info(arc)
-        this.utility.upload(f.name, f.title, f.comments, arc).subscribe()
-        this.router.navigate(['/view2'])
+        this.utility.upload(f.name, f.title, f.comments, arc).subscribe({
+            next: (v) => console.info(v),
+            error: (e) => {
+                console.info(e),
+                alert(e.error.message)
+            },
+            complete: () => {this.router.navigate(['/view2'])}
+        })
+        // this.router.navigate(['/view2'])
     }
 }
