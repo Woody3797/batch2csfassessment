@@ -12,7 +12,6 @@ export class UtilityService {
 
     bundleId = ''
 
-
     upload(name: string, title: string, comments: string, archive: File): Observable<any> {
         const formData = new FormData();
         formData.set('name', name)
@@ -24,7 +23,6 @@ export class UtilityService {
     }
 
     getBundleByBundleId(bundleId: string): Observable<Bundle> {
-        const params = new HttpParams().set('bundleId', bundleId)
 
         return this.http.get<Bundle>('http://localhost:8080/bundle/' + bundleId)
     }
