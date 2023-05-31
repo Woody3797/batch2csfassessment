@@ -58,10 +58,8 @@ public class UploadController {
             .add("error", "bundleId " + bundleId + " not found")
             .build().toString());
         }
-        
     }
 	
-
 	// TODO: Task 6
     @GetMapping(path = "/bundles", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
