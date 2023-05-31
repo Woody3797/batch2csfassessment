@@ -3,6 +3,8 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Bundle } from './model';
 
+const URL = 'http://localhost:8080'
+
 @Injectable({
     providedIn: 'root'
 })
@@ -19,17 +21,17 @@ export class UtilityService {
         formData.set('comments', comments)
         formData.set('archive', archive)
 
-        return this.http.post<any>('http://localhost:8080/upload', formData)
+        return this.http.post<any>('/upload', formData)
     }
 
     getBundleByBundleId(bundleId: string): Observable<Bundle> {
 
-        return this.http.get<Bundle>('http://localhost:8080/bundle/' + bundleId)
+        return this.http.get<Bundle>('/bundle/' + bundleId)
     }
 
     getBundles(): Observable<Bundle[]> {
 
-        return this.http.get<Bundle[]>('http://localhost:8080/bundles')
+        return this.http.get<Bundle[]>('/bundles')
     }
 
 }

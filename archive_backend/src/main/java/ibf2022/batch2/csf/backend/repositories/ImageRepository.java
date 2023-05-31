@@ -17,6 +17,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
 
 @Repository
 public class ImageRepository {
@@ -49,10 +50,10 @@ public class ImageRepository {
 
             // Make the file publically accessible
             putReq = putReq.withCannedAcl(CannedAccessControlList.PublicRead);
-            // PutObjectResult result = s3.putObject(putReq);
+            PutObjectResult result = s3.putObject(putReq);
             URL url = s3.getUrl("woodybucket", key + "/" + file.getOriginalFilename());
             urlList.add(url);
-            System.out.println(">> result: " + url);
+            System.out.println(">> url: " + url + ", result: " + result);
         }
 
         return urlList;
